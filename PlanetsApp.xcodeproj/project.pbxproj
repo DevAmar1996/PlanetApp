@@ -29,9 +29,29 @@
 		3E649DE72D39851A001B7971 /* PlanetsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanetsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3E649E002D398957001B7971 /* Exceptions for "PlanetsApp" folder in "PlanetsAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Features/Model/Planet.swift,
+				Features/ViewModel/PlanetsViewModel.swift,
+				Helper/APIConstants.swift,
+				Network/HTTPMethod.swift,
+				Network/Protocol/NetworkError.swift,
+				Network/Protocol/NetworkService.swift,
+				Network/URLSessionNetworkService.swift,
+				Protocol/DataFetcher.swift,
+			);
+			target = 3E649DDC2D39851A001B7971 /* PlanetsAppTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3E649DCF2D398518001B7971 /* PlanetsApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3E649E002D398957001B7971 /* Exceptions for "PlanetsApp" folder in "PlanetsAppTests" target */,
+			);
 			path = PlanetsApp;
 			sourceTree = "<group>";
 		};

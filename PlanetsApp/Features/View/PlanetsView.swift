@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PlanetsView: View {
-    @StateObject private var viewModel = PlanetsViewModel(networkService: URLSessionNetworkService())
+    @StateObject private var viewModel = PlanetsViewModel(dataFetcher: PlanerDataFetcher(offlineFetcher: OfflineDataFetcher(localStorage: UserDfaultsLocalStorage()), onlineFetcher: OnlineDataFetcher(networkService: URLSessionNetworkService()), localStorage: UserDfaultsLocalStorage(), networkMonitor: NetworkMonitor()))
     var body: some View {
         NavigationView {
             if let viewModelError = viewModel.errorMessage {

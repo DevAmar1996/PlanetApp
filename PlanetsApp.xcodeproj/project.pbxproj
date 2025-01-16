@@ -33,14 +33,20 @@
 		3E649E002D398957001B7971 /* Exceptions for "PlanetsApp" folder in "PlanetsAppTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				DataFetch/DatFetcherRepository.swift,
+				DataFetch/Network/HTTPMethod.swift,
+				DataFetch/Network/NetworkMonitor.swift,
+				DataFetch/Network/Protocol/NetworkError.swift,
+				DataFetch/Network/Protocol/NetworkService.swift,
+				DataFetch/Network/URLSessionNetworkService.swift,
+				DataFetch/Offline/OfflineDataFetcher.swift,
+				DataFetch/Offline/Protocol/LocalStorage.swift,
+				DataFetch/Offline/UserDefaults/UserDfaultsLocalStorage.swift,
+				DataFetch/Online/OnlineDataFetcher.swift,
+				DataFetch/Protocol/DataFetcher.swift,
 				Features/Model/Planet.swift,
 				Features/ViewModel/PlanetsViewModel.swift,
 				Helper/APIConstants.swift,
-				Network/HTTPMethod.swift,
-				Network/Protocol/NetworkError.swift,
-				Network/Protocol/NetworkService.swift,
-				Network/URLSessionNetworkService.swift,
-				Protocol/DataFetcher.swift,
 			);
 			target = 3E649DDC2D39851A001B7971 /* PlanetsAppTests */;
 		};

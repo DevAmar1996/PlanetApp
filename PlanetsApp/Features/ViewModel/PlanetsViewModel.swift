@@ -18,11 +18,11 @@ class PlanetsViewModel: ObservableObject {
     @Published var planets: [Planet] = []
     @Published var errorMessage: String? // For displaying errors
 
-    var networkService: NetworkService
+    var dataFetcher: PlanerDataFetcher
     private var cancellables = Set<AnyCancellable>() // For Combine subscriptions
 
-    init(networkService: NetworkService) {
-        self.networkService = networkService
+    init(dataFetcher: PlanerDataFetcher) {
+        self.dataFetcher = dataFetcher
     }
 
     func loadViewContent() {
@@ -30,9 +30,8 @@ class PlanetsViewModel: ObservableObject {
     }
 
     private func getPlanets() {
-        networkService.makeRequest(
-            url: APIConstants.BASEURL,
-            httpMethod: .get)
+        dataFetcher.fetchData(
+            path: APIConstants.BASEURL)
         .sink { [weak self] completion in
             switch completion {
             case .failure(let error):
@@ -40,9 +39,9 @@ class PlanetsViewModel: ObservableObject {
             case .finished:
                 break
             }
-        } receiveValue: { [weak self] (planet: PlanetResponse) in
-            print("I got the planets ", planet.results)
-            self?.planets = planet.results
+        } receiveValue: { [weak self] planets in
+            print("I got the planets ", planets)
+            self?.planets = planets
         }.store(in: &cancellables)
     }
 

@@ -20,5 +20,83 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FB91B585-A24F-49C5-8244-A7DC90B4D6D1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PlanetsApp/DataFetch/Offline/UserDefaults/UserDfaultsLocalStorage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "retrieveObject(forKey:as:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FB91B585-A24F-49C5-8244-A7DC90B4D6D1 - 1ce4dc8ba73b9a35"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PlanetsApp.UserDfaultsLocalStorage.retrieveObject&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(forKey: Swift.String, as: &#x3c4;_0_0.Type) throws -&gt; Swift.Optional&lt;&#x3c4;_0_0&gt;"
+                  moduleName = "PlanetsApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/qamaralamassi/Downloads/PlanetsApp/PlanetsApp/DataFetch/Offline/UserDefaults/UserDfaultsLocalStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30">
+               </Location>
+               <Location
+                  uuid = "FB91B585-A24F-49C5-8244-A7DC90B4D6D1 - 1ce4dc8ba73b9a35"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PlanetsApp.UserDfaultsLocalStorage.retrieveObject&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(forKey: Swift.String, as: &#x3c4;_0_0.Type) throws -&gt; Swift.Optional&lt;&#x3c4;_0_0&gt;"
+                  moduleName = "PlanetsApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/qamaralamassi/Downloads/PlanetsApp/PlanetsApp/DataFetch/Offline/UserDefaults/UserDfaultsLocalStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "482D6596-EF99-4F54-8588-331F3E4E85A4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PlanetsApp/DataFetch/Offline/UserDefaults/UserDfaultsLocalStorage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "retrieveObject(forKey:as:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6423A5AA-EEEF-4115-BBE8-74B364863DD2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PlanetsApp/DataFetch/Offline/UserDefaults/UserDfaultsLocalStorage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "saveObject(_:forKey:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

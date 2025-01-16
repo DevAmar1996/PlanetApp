@@ -13,5 +13,8 @@ protocol DataFetcher {
 
     /// Fetch data from the source.
     /// - Returns: A `Combine` publisher that emits the fetched data or an error.
-    func fetchData() -> AnyPublisher<DataType, Error>
+    func fetchData(path: String) -> AnyPublisher<DataType, Error>
 }
+
+
+

@@ -12,11 +12,11 @@ class MockNetworkMonitor: NetworkMonitor {
     //simaulate network status
     private let isConnectedSubject = CurrentValueSubject<Bool, Never>(false)
 
-    override var isConnected: Bool {
+     var isConnected: Bool {
         isConnectedSubject.value
     }
 
-    override var isConnectedPublisher: AnyPublisher<Bool, Never> {
+    var isConnectedPublisher: AnyPublisher<Bool, Never> {
         isConnectedSubject.eraseToAnyPublisher()
     }
 

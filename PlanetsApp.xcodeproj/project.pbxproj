@@ -50,6 +50,7 @@
 		3E649E002D398957001B7971 /* Exceptions for "PlanetsApp" folder in "PlanetsAppTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				asset/OfflinePlanets.json,
 				asset/Planets.json,
 				DataFetch/DatFetcherRepository.swift,
 				DataFetch/Network/HTTPMethod.swift,
@@ -72,6 +73,7 @@
 		3EB67B092D3A5C3500DE2972 /* Exceptions for "PlanetsApp" folder in "PlanetMacOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				asset/OfflinePlanets.json,
 				asset/Planets.json,
 				DataFetch/DatFetcherRepository.swift,
 				DataFetch/Network/HTTPMethod.swift,
@@ -95,6 +97,7 @@
 		3EB67B0A2D3A5C3500DE2972 /* Exceptions for "PlanetsApp" folder in "PlanetMacOSTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				asset/OfflinePlanets.json,
 				asset/Planets.json,
 				DataFetch/DatFetcherRepository.swift,
 				DataFetch/Network/HTTPMethod.swift,

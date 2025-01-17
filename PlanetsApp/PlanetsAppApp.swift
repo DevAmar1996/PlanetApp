@@ -12,11 +12,11 @@ struct PlanetsAppApp: App {
     @StateObject private var viewModel: PlanetsViewModel
 
     init() {
-        let networkMonitor = NetworkMonitor()
+        let networkMonitor = PlanetNetworkMonitor()
         let localStorage = UserDefaultsLocalStorage()
         let offlineFetcher = OfflineDataFetcher<[Planet]>(localStorage: localStorage)
         let onlineFetcher = OnlineDataFetcher<PlanetResponse>(networkService: URLSessionNetworkService())
-        let dataFetcher = PlanerDataFetcher(
+        let dataFetcher = PlanetDataFetcher(
             offlineFetcher: offlineFetcher,
             onlineFetcher: onlineFetcher,
             localStorage: localStorage,

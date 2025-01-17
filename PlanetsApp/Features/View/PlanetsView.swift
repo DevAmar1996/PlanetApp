@@ -46,6 +46,6 @@ struct PlanetsView: View {
 }
 
 #Preview {
-    let viewModel = PlanetsViewModel(dataFetcher: PlanerDataFetcher(offlineFetcher: OfflineDataFetcher(localStorage: UserDefaultsLocalStorage()), onlineFetcher: OnlineDataFetcher(networkService: URLSessionNetworkService()), localStorage: UserDefaultsLocalStorage(), networkMonitor: NetworkMonitor()))
+    let viewModel = PlanetsViewModel(dataFetcher: PlanetDataFetcher(offlineFetcher: OfflineDataFetcher(localStorage: UserDefaultsLocalStorage()), onlineFetcher: OnlineDataFetcher(networkService: URLSessionNetworkService()), localStorage: UserDefaultsLocalStorage(), networkMonitor: PlanetNetworkMonitor()))
     return PlanetsView(viewModel: viewModel)
 }

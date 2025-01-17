@@ -1,0 +1,37 @@
+{
+    "count": 4,
+    "results": [
+        {
+            "name": "Tatooine",
+            "population": "200000",
+            "climate": "arid",
+            "terrain": "desert",
+            "gravity": "1 standard",
+            "diameter": "10465"
+        },
+        {
+            "name": "Alderaan",
+            "population": "2000000000",
+            "climate": "temperate",
+            "terrain": "grasslands, mountains",
+            "gravity": "1 standard",
+            "diameter": "12500"
+        },
+        {
+            "name": "Hoth",
+            "population": "unknown",
+            "climate": "frozen",
+            "terrain": "tundra, ice caves, mountain ranges",
+            "gravity": "1.1 standard",
+            "diameter": "7200"
+        },
+        {
+            "name": "Dagobah",
+            "population": "unknown",
+            "climate": "murky",
+            "terrain": "swamp, jungles",
+            "gravity": "0.9 standard",
+            "diameter": "8900"
+        }
+    ]
+}

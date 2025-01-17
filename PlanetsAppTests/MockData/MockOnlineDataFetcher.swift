@@ -12,9 +12,7 @@ class MockOnlineDataFetcher<T: Codable>: OnlineDataFetcher<T> {
     var mockData: T?
     
     override func fetchData(path: String) -> AnyPublisher<T, Error> {
-        if shouldReturnError {
-            return Fail(error: URLError(.badServerResponse)).eraseToAnyPublisher()
-        } else if let data = mockData {
+       if let data = mockData {
             return Just(data).setFailureType(to: Error.self).eraseToAnyPublisher()
         } else {
             return Fail(error: URLError(.badServerResponse)).eraseToAnyPublisher()

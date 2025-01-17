@@ -8,10 +8,20 @@
 import Testing
 import Combine
 
-class NetworkMonitorTests {
+final class NetworkMonitorTests {
 
-    var networkMonitor: MockNetworkMonitor = MockNetworkMonitor()
+    var networkMonitor: MockNetworkMonitor!
     var cancellables: Set<AnyCancellable> = []
+
+    init() {
+        self.networkMonitor = MockNetworkMonitor()
+        self.cancellables = []
+    }
+
+    deinit {
+        self.networkMonitor = nil
+        self.cancellables = []
+    }
 
     @Test func testNetworkConnected() async throws {
         //check network state connected

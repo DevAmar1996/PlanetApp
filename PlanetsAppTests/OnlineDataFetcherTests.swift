@@ -9,16 +9,26 @@ import Testing
 import Combine
 import Foundation
 
-class OnlineDataFetcherTests {
-    var mockNetworkService: MockNetworkService = MockNetworkService()
+final class OnlineDataFetcherTests {
+    var mockNetworkService: MockNetworkService!
     var onlineDataFetcher: OnlineDataFetcher<TestObject>!
     var cancellables: Set<AnyCancellable> = []
 
     init() {
+        mockNetworkService = MockNetworkService()
         self.onlineDataFetcher = OnlineDataFetcher(networkService:  mockNetworkService)
+        cancellables = []
     }
 
-    @Test func testFetchData_Success() async throws {
+    deinit {
+        //remove all referance after each test
+        cancellables = []
+        mockNetworkService = nil
+        onlineDataFetcher = nil
+    }
+
+    @Test("online fetch data from correct source")
+    func testFetchData_Success() {
         //Mock response data
         let testObject = TestObject(id: 1, name: "Planet Tatooine")
         let jsonData = try! JSONEncoder().encode(testObject)
@@ -34,7 +44,8 @@ class OnlineDataFetcherTests {
             }.store(in: &cancellables)
     }
 
-    @Test func testFetchData_Failure() {
+    @Test("online fetch data from wrong source")
+     func testFetchData_Failure() {
         mockNetworkService.shouldReturnError = true
         onlineDataFetcher.fetchData(path: "")
             .sink { completion in

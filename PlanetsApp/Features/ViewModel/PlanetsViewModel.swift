@@ -18,10 +18,10 @@ class PlanetsViewModel: ObservableObject {
     @Published var planets: [Planet] = []
     @Published var errorMessage: String? // For displaying errors
 
-    var dataFetcher: PlanerDataFetcher
+    var dataFetcher: PlanetDataFetcher
     private var cancellables = Set<AnyCancellable>() // For Combine subscriptions
 
-    init(dataFetcher: PlanerDataFetcher) {
+    init(dataFetcher: PlanetDataFetcher) {
         self.dataFetcher = dataFetcher
     }
 

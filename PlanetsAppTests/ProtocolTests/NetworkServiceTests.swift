@@ -9,9 +9,19 @@ import Testing
 import Combine
 import Foundation
 
-class NetworkServiceTests {
-    var mockService: MockNetworkService = MockNetworkService()
+final class NetworkServiceTests {
+    var mockService: MockNetworkService!
     var cancellables: Set<AnyCancellable> = []
+
+    init() {
+        self.mockService = MockNetworkService()
+        self.cancellables = []
+    }
+
+    deinit {
+        self.mockService = nil
+        self.cancellables = []
+    }
 
     //test successfull response
     @Test func testNetworkService_Success() async throws {

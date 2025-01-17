@@ -9,12 +9,12 @@ import Foundation
 import Network
 import Combine
 
-protocol NetworkMonitorProtocol {
+protocol NetworkMonitor {
      var isConnected: Bool { get }
      var isConnectedPublisher: AnyPublisher<Bool, Never> { get }
 }
 
-class NetworkMonitor: NetworkMonitorProtocol {
+class PlanetNetworkMonitor: NetworkMonitor {
     private let monitor = NWPathMonitor()
     private let queue = DispatchQueue.global(qos: .background)
     @Published private(set) var isConnected = false

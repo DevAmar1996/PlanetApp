@@ -8,24 +8,33 @@
 import Testing
 import Combine
 
-class OfflineDataFetcherTests {
-    var mockLocalStorage: MockLocalStorage = MockLocalStorage()
+final class OfflineDataFetcherTests {
+    var mockLocalStorage: MockLocalStorage!
     var offlineDataFetcher: OfflineDataFetcher<TestObject>!
     var cancellables: Set<AnyCancellable> = []
-
+    
     init() {
-        self.offlineDataFetcher = OfflineDataFetcher(localStorage: mockLocalStorage)
+        mockLocalStorage  = MockLocalStorage()
+        offlineDataFetcher = OfflineDataFetcher(localStorage: mockLocalStorage)
+        cancellables = []
     }
 
-    @Test func testFetchData_Success() async throws {
+    deinit {
+        mockLocalStorage = nil
+        offlineDataFetcher = nil
+        cancellables = []
+    }
+
+    @Test("Offline fetch data while key is existing in local storage")
+    func testFetchData_Success() {
         //prepare object
         let testObject = TestObject(id: 1, name: "Planet Tatooine")
         let key = "testKey"
-
+        
         do {
             //save it in local storage
             try mockLocalStorage.saveObject(testObject, forKey: key)
-
+            
             //should fetch data successfuly
             offlineDataFetcher.fetchData(path: key)
                 .sink { completion in
@@ -39,8 +48,9 @@ class OfflineDataFetcherTests {
             #expect(Bool(false), "Unexpected error: \(error)")
         }
     }
-
-   @Test func testFetchData_Failure() {
+    
+    @Test("Offline fetch data while key is no existing in local storage")
+    func testFetchData_Failure() {
         let key = "unexistKey"
         do {
             //key not exist should return error
@@ -54,6 +64,4 @@ class OfflineDataFetcherTests {
                 }.store(in: &cancellables)
         }
     }
-
-
 }

@@ -7,8 +7,16 @@
 
 import Testing
 
-struct LocalStorageTests {
-    var mockLocalStorage: MockLocalStorage = MockLocalStorage()
+final actor LocalStorageTests {
+    var mockLocalStorage: MockLocalStorage!
+
+    init() {
+        self.mockLocalStorage =  MockLocalStorage()
+    }
+
+    deinit {
+        self.mockLocalStorage = nil
+    }
 
     @Test func testSaveRetriveData_Sucess() async throws {
         //prapre the object to be saved

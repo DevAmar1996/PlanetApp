@@ -7,10 +7,19 @@
 
 import Testing
 
-struct UserDefaultsLocalStorageTests {
-    var localStorage: UserDefaultsLocalStorage = UserDefaultsLocalStorage()
+final actor UserDefaultsLocalStorageTests {
+    var localStorage: UserDefaultsLocalStorage!
 
-    @Test func testSaveRetiveSuccess() async throws {
+    init() {
+        self.localStorage = UserDefaultsLocalStorage()
+    }
+
+    deinit {
+        self.localStorage = nil
+    }
+
+    @Test("Save key in local storage make sure it retrive successfully")
+    func testSaveRetiveSuccess() async throws {
         //prepare testObject
         let testObject = TestObject(id: 28, name: "Planet")
         let key = "testKey"
@@ -27,7 +36,8 @@ struct UserDefaultsLocalStorageTests {
         }
     }
 
-    @Test func testFailRetrive_NotExistKey() async throws {
+    @Test("test retrive unexisting key")
+    func testFailRetrive_NotExistKey() async throws {
         let key = "notExistKey"
         do {
             //retrive the object

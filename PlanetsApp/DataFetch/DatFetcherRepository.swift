@@ -9,18 +9,18 @@ import Foundation
 import Combine
 
 /// connect between remote and offline fetching based on network status
-class PlanerDataFetcher: DataFetcher {
+class PlanetDataFetcher: DataFetcher {
     typealias DataType = [Planet]
 
     private let offlineFetcher: OfflineDataFetcher<[Planet]>
     private let onlineFetcher: OnlineDataFetcher<PlanetResponse>
     private let localStorage: LocalStorage
-    private let networkMonitor: NetworkMonitorProtocol
+    private let networkMonitor: NetworkMonitor
 
     init(offlineFetcher: OfflineDataFetcher<[Planet]>,
          onlineFetcher: OnlineDataFetcher<PlanetResponse>,
          localStorage: LocalStorage,
-         networkMonitor: NetworkMonitorProtocol) {
+         networkMonitor: NetworkMonitor) {
         self.offlineFetcher = offlineFetcher
         self.onlineFetcher = onlineFetcher
         self.localStorage = localStorage

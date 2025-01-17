@@ -1,19 +1,19 @@
 //
-//  PlanetsAppApp.swift
-//  PlanetsApp
+//  PlanetMacOSApp.swift
+//  PlanetMacOS
 //
-//  Created by Qamar Al Amassi on 16/01/2025.
+//  Created by Qamar Al Amassi on 17/01/2025.
 //
 
 import SwiftUI
 
 @main
-struct PlanetsAppApp: App {
+struct PlanetMacOSApp: App {
     @StateObject private var viewModel: PlanetsViewModel
 
     init() {
-        let networkMonitor = NetworkMonitor()
         let localStorage = UserDefaultsLocalStorage()
+        let networkMonitor = NetworkMonitor()
         let offlineFetcher = OfflineDataFetcher<[Planet]>(localStorage: localStorage)
         let onlineFetcher = OnlineDataFetcher<PlanetResponse>(networkService: URLSessionNetworkService())
         let dataFetcher = PlanerDataFetcher(
@@ -22,10 +22,9 @@ struct PlanetsAppApp: App {
             localStorage: localStorage,
             networkMonitor: networkMonitor
         )
-
         _viewModel = StateObject(wrappedValue: PlanetsViewModel(dataFetcher: dataFetcher))
     }
-    
+
     var body: some Scene {
         WindowGroup {
             PlanetsView(viewModel: viewModel)

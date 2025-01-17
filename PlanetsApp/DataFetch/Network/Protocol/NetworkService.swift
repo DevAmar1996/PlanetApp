@@ -25,7 +25,6 @@ protocol NetworkService {
                                    headers: [String: String]?) -> AnyPublisher<T, Error>
 }
 
-
 extension NetworkService {
     /// provide make request with optional header and paramerer
     /// This allows you to make simple requests without explicitly passing `nil` for unused arguments.

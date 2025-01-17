@@ -27,11 +27,14 @@ protocol LocalStorage {
 //Enum for offline Error
 enum OfflineError: Error, LocalizedError {
     case noDataAvailable
+    case failToSave
 
     var errorDescription: String? {
         switch self {
          case .noDataAvailable:
             return "No data available."
+        case .failToSave:
+            return "Fail to Save data."
         }
     }
 }

@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct PlanetsView: View {
-    @StateObject private var viewModel = PlanetsViewModel(dataFetcher: PlanerDataFetcher(offlineFetcher: OfflineDataFetcher(localStorage: UserDfaultsLocalStorage()), onlineFetcher: OnlineDataFetcher(networkService: URLSessionNetworkService()), localStorage: UserDfaultsLocalStorage(), networkMonitor: NetworkMonitor()))
+    @ObservedObject var viewModel: PlanetsViewModel
     var body: some View {
         NavigationView {
             if let viewModelError = viewModel.errorMessage {
                 //display the error for user allow them to retry the reuest
-                HStack {
+                VStack {
                     Text("Error: \(viewModelError)")
                         .foregroundColor(.red)
                         .multilineTextAlignment(.center)
@@ -46,5 +46,6 @@ struct PlanetsView: View {
 }
 
 #Preview {
-    PlanetsView()
+    let viewModel = PlanetsViewModel(dataFetcher: PlanerDataFetcher(offlineFetcher: OfflineDataFetcher(localStorage: UserDefaultsLocalStorage()), onlineFetcher: OnlineDataFetcher(networkService: URLSessionNetworkService()), localStorage: UserDefaultsLocalStorage(), networkMonitor: NetworkMonitor()))
+    return PlanetsView(viewModel: viewModel)
 }

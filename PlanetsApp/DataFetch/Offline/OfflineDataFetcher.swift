@@ -28,5 +28,4 @@ class OfflineDataFetcher<T: Decodable>: DataFetcher {
                 .eraseToAnyPublisher()
         }
     }
-
 }

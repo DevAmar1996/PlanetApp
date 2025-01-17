@@ -7,15 +7,14 @@
 
 import Foundation
 
-class UserDfaultsLocalStorage: LocalStorage {
+class UserDefaultsLocalStorage: LocalStorage {
     func saveObject<T: Encodable>(_ object: T, forKey key: String) throws {
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(object)
             UserDefaults.standard.set(data, forKey: key)
         } catch {
-            print("Failed to save object for key \(key): \(error)")
-            throw error
+            throw OfflineError.failToSave
         }
     }
     
@@ -27,9 +26,8 @@ class UserDfaultsLocalStorage: LocalStorage {
             return try decoder.decode(T.self, from: data)
         } catch {
             print("Failed to fetch object for key \(key): \(error)")
-            throw error
+            throw OfflineError.noDataAvailable 
         }
     }
-    
 
 }

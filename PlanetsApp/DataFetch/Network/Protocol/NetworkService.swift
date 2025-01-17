@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+
 //Protocol for define the main actions for network layer
 protocol NetworkService {
     /// Makes an asynchronous network request and decodes the response into a specified type.

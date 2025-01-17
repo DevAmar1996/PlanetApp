@@ -8,6 +8,13 @@
 import Foundation
 import Combine
 
+/**
+ Handles HTTP requests using `URLSession` and Combine.
+
+ - Validates URLs, encodes parameters, and configures requests.
+ - Decodes responses into `Decodable` types.
+ - Supports error handling and status code validation.
+ */
 struct URLSessionNetworkService: NetworkService {
     func makeRequest<T: Decodable>(url: String,
                                    httpMethod: HTTPMethod,

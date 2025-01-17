@@ -7,6 +7,7 @@
 import Foundation
 
 //Custom errors for the network layer
+// This enum defines common errors that may occur during network operations.
 enum NetworkError: Error, LocalizedError {
     case invalidURL
     case requestFailed(statusCode: Int, message: String)

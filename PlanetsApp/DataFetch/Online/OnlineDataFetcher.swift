@@ -8,16 +8,6 @@
 import Foundation
 import Combine
 
-
-// solid
-// single responsability
-// open for extends close for modification
-// l
-// integrace segragation -> Protocol
-// depndency inverstion -> A -> B, C -> D
-
-// viewModel -> Repoisotry -> remotedata source, local data source
-
 class OnlineDataFetcher<T: Codable>: DataFetcher {
     typealias DataType = T
 
@@ -30,6 +20,7 @@ class OnlineDataFetcher<T: Codable>: DataFetcher {
     }
 
     func fetchData(path: String) -> AnyPublisher<T, any Error> {
+        // Make a network request using the provided path and HTTP GET method.
         networkService.makeRequest(url: path,
                                       httpMethod: .get)
             .eraseToAnyPublisher()

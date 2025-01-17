@@ -8,27 +8,46 @@
 import Foundation
 import Combine
 
+// Protocol to define the basic requirements for a PlanetsViewModel.
 protocol PlanetsViewModelProtocol {
     var networkService: NetworkService {get set}
     func loadViewContent()
 }
 
+/// A ViewModel responsible for managing the data and state of the Planets view.
+/// Fetches planet data using the `PlanetDataFetcher` and updates the published properties.
 class PlanetsViewModel: ObservableObject {
 
+    // MARK: - Published Properties
     @Published var planets: [Planet] = []
-    @Published var errorMessage: String? // For displaying errors
+    @Published var errorMessage: String?
 
+    // MARK: - Dependencies
     var dataFetcher: PlanetDataFetcher
-    private var cancellables = Set<AnyCancellable>() // For Combine subscriptions
 
+    // MARK: - Combine
+    private var cancellables = Set<AnyCancellable>()
+
+    // MARK: - Initializer
+
+    /// Initializes the `PlanetsViewModel` with a given data fetcher.
+    ///
+    /// - Parameter dataFetcher: An instance of `PlanetDataFetcher` for fetching planet data.
     init(dataFetcher: PlanetDataFetcher) {
         self.dataFetcher = dataFetcher
     }
 
+    // MARK: - Public Methods
+
+    /// Loads the content for the view by fetching the planets.
     func loadViewContent() {
         getPlanets()
     }
 
+
+    // MARK: - Private Methods
+    
+    /// Fetches the planets from the data fetcher and updates the published properties.
     private func getPlanets() {
         dataFetcher.fetchData(
             path: APIConstants.BASEURL)
@@ -44,5 +63,4 @@ class PlanetsViewModel: ObservableObject {
             self?.planets = planets
         }.store(in: &cancellables)
     }
-
 }

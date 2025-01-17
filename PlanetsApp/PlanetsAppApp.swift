@@ -11,6 +11,7 @@ import SwiftUI
 struct PlanetsAppApp: App {
     @StateObject private var viewModel: PlanetsViewModel
 
+    /// Initializes the app and sets up the dependency injection for the `PlanetsViewModel`.
     init() {
         let networkMonitor = PlanetNetworkMonitor()
         let localStorage = UserDefaultsLocalStorage()
@@ -26,6 +27,7 @@ struct PlanetsAppApp: App {
         _viewModel = StateObject(wrappedValue: PlanetsViewModel(dataFetcher: dataFetcher))
     }
     
+    /// The main body of the app defining the app's UI hierarchy.
     var body: some Scene {
         WindowGroup {
             PlanetsView(viewModel: viewModel)

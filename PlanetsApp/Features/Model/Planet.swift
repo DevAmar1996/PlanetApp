@@ -15,7 +15,7 @@ struct PlanetResponse: Codable, Equatable {
 }
 
 struct Planet: Codable, Identifiable, Equatable {
-    let id = UUID() // Temporary unique identifier for SwiftUI
+    let id = UUID() // Temporary unique identifier for SwiftUI list identifier
     let name: String
     let rotationPeriod: String?
     let orbitalPeriod: String?

@@ -18,12 +18,14 @@ class OfflineDataFetcher<T: Decodable>: DataFetcher {
     }
 
     func fetchData(path: String) -> AnyPublisher<T, any Error> {
+        // Attempt to retrieve the data from local storage.
         if let data = try? localStorage.retrieveObject(forKey: path, as: T.self) {
-            //return the data if found
+            // Return the data as a Combine publisher using `Just`.
             return Just(data)
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         } else {
+            // Return a failure publisher if no data is found.
             return Fail(error: OfflineError.noDataAvailable)
                 .eraseToAnyPublisher()
         }

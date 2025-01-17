@@ -9,12 +9,8 @@ import Foundation
 import Combine
 
 protocol DataFetcher {
-    associatedtype DataType: Decodable
 
     /// Fetch data from the source.
     /// - Returns: A `Combine` publisher that emits the fetched data or an error.
-    func fetchData(path: String) -> AnyPublisher<DataType, Error>
+    func fetchData<T: Codable>(path: String, _ type: T.Type) -> AnyPublisher<T, Error>
 }
-
-
-

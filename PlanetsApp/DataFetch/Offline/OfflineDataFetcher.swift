@@ -8,18 +8,17 @@
 import Foundation
 import Combine
 
-class OfflineDataFetcher<T: Decodable>: DataFetcher {
-
-    typealias DataType = T
+class OfflineDataFetcher: DataFetcher {
     let localStorage: LocalStorage
 
     init(localStorage: LocalStorage) {
         self.localStorage = localStorage
     }
-
-    func fetchData(path: String) -> AnyPublisher<T, any Error> {
+    
+    func fetchData<T: Codable>(path: String, _ type: T.Type) -> AnyPublisher<T, Error> {
         // Attempt to retrieve the data from local storage.
-        if let data = try? localStorage.retrieveObject(forKey: path, as: T.self) {
+        if let data = try? localStorage.retrieveObject(forKey: path,
+                                                       as: type) {
             // Return the data as a Combine publisher using `Just`.
             return Just(data)
                 .setFailureType(to: Error.self)
@@ -30,4 +29,5 @@ class OfflineDataFetcher<T: Decodable>: DataFetcher {
                 .eraseToAnyPublisher()
         }
     }
+
 }

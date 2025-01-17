@@ -23,7 +23,7 @@ class PlanetsViewModel: ObservableObject {
     @Published var errorMessage: String?
 
     // MARK: - Dependencies
-    var dataFetcher: PlanetDataFetcher
+    var dataFetcher: DataFetcher
 
     // MARK: - Combine
     private var cancellables = Set<AnyCancellable>()
@@ -33,7 +33,7 @@ class PlanetsViewModel: ObservableObject {
     /// Initializes the `PlanetsViewModel` with a given data fetcher.
     ///
     /// - Parameter dataFetcher: An instance of `PlanetDataFetcher` for fetching planet data.
-    init(dataFetcher: PlanetDataFetcher) {
+    init(dataFetcher: DataFetcher) {
         self.dataFetcher = dataFetcher
     }
 
@@ -44,13 +44,12 @@ class PlanetsViewModel: ObservableObject {
         getPlanets()
     }
 
-
     // MARK: - Private Methods
-    
+
     /// Fetches the planets from the data fetcher and updates the published properties.
     private func getPlanets() {
         dataFetcher.fetchData(
-            path: APIConstants.BASEURL)
+            path: APIConstants.BASE_URL, PlanetResponse.self)
         .sink { [weak self] completion in
             switch completion {
             case .failure(let error):
@@ -58,9 +57,9 @@ class PlanetsViewModel: ObservableObject {
             case .finished:
                 break
             }
-        } receiveValue: { [weak self] planets in
-            print("I got the planets ", planets)
-            self?.planets = planets
+        } receiveValue: { [weak self] (planets: PlanetResponse) in
+            print("I got the planets ", planets.results)
+            self?.planets = planets.results
         }.store(in: &cancellables)
     }
 }

@@ -8,21 +8,17 @@
 import Foundation
 import Combine
 
-class OnlineDataFetcher<T: Codable>: DataFetcher {
-    typealias DataType = T
+class OnlineDataFetcher: DataFetcher {
 
-    var networkService: NetworkService
-
-    private var cancellables = Set<AnyCancellable>()
+    private let networkService: NetworkService
 
     init(networkService: NetworkService) {
         self.networkService = networkService
     }
 
-    func fetchData(path: String) -> AnyPublisher<T, any Error> {
+    func fetchData<T: Decodable>(path: String, _ type: T.Type) -> AnyPublisher<T, Error> {
         // Make a network request using the provided path and HTTP GET method.
-        networkService.makeRequest(url: path,
-                                      httpMethod: .get)
+        networkService.makeRequest(url: path, httpMethod: .get)
             .eraseToAnyPublisher()
     }
 }

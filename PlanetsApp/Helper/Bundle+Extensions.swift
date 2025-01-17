@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 extension Bundle {
     /// Load JSON data from a file in the specified bundle.
     /// - Parameter fileName: The name of the JSON file (without the extension).

@@ -17,7 +17,6 @@ struct InvalidObject: Encodable {
     let invalidReference: Any // `Any` is not encodable
 
     func encode(to encoder: any Encoder) throws {
-        let testObject = TestObject(id: 1, name: "Planet Tatooine")
-              let key = "testKey"
+   
     }
 }

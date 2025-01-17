@@ -15,9 +15,9 @@ struct PlanetsAppApp: App {
     init() {
         let networkMonitor = PlanetNetworkMonitor()
         let localStorage = UserDefaultsLocalStorage()
-        let offlineFetcher = OfflineDataFetcher<[Planet]>(localStorage: localStorage)
-        let onlineFetcher = OnlineDataFetcher<PlanetResponse>(networkService: URLSessionNetworkService())
-        let dataFetcher = PlanetDataFetcher(
+        let offlineFetcher = OfflineDataFetcher(localStorage: localStorage)
+        let onlineFetcher = OnlineDataFetcher(networkService: URLSessionNetworkService())
+        let dataFetcher = DataFetcherRepository(
             offlineFetcher: offlineFetcher,
             onlineFetcher: onlineFetcher,
             localStorage: localStorage,

@@ -10,8 +10,8 @@ import Foundation
 class MockLocalStorage: LocalStorage {
     private var storage: [String: Data] = [:]
 
+    //simulate saving using dictionary
     func saveObject<T: Encodable>(_ object: T, forKey key: String) throws {
-        //simulate saving using dict
         let encoder = JSONEncoder()
         do {
             let data = try encoder.encode(object)
@@ -21,8 +21,8 @@ class MockLocalStorage: LocalStorage {
         }
     }
 
+    //simulate retriving using dictionary
     func retrieveObject<T: Decodable>(forKey key: String, as type: T.Type) throws -> T? {
-        //simulate retrving using dict
         guard let data = storage[key] else {
             throw OfflineError.noDataAvailable
         }

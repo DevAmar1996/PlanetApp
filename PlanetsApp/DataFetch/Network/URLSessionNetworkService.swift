@@ -43,6 +43,7 @@ struct URLSessionNetworkService: NetworkService {
 
         return session.dataTaskPublisher(for: request)
             .tryMap { output in
+                print("OUTPUT is \(output)")
                 // Check the status code
                 guard let httpResponse = output.response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {

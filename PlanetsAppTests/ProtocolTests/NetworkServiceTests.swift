@@ -28,7 +28,7 @@ final class NetworkServiceTests {
         //Mock response data
         guard let jsonData = try? Bundle.main.loadJSONData(from: "Planets") else {
             #expect(Bool(false), "failed to load dat from json")
-           return
+            return
         }
         mockService.data = jsonData
         mockService.makeRequest(url: "https://mockapi.dev/planets", httpMethod: .get)
@@ -64,7 +64,7 @@ final class NetworkServiceTests {
         //Mock response data
         guard let jsonData = try? Bundle.main.loadJSONData(from: "Planets") else {
             #expect(Bool(false), "failed to load dat from json")
-           return
+            return
         }
         mockService.data = jsonData
         mockService.makeRequest(url: "", httpMethod: .get)

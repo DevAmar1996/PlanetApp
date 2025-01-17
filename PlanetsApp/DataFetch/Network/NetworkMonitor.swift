@@ -26,7 +26,7 @@ class PlanetNetworkMonitor: NetworkMonitor {
     /// A background queue to execute network monitoring tasks.
     private let queue = DispatchQueue.global(qos: .background)
 
-    @Published private(set) var isConnected = false
+    @Published private(set) var isConnected = true
 
     /// get updated when ever is connected updated
     var isConnectedPublisher: AnyPublisher<Bool, Never> {

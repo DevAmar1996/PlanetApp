@@ -10,7 +10,7 @@ import Combine
 
 final class OfflineDataFetcherTests {
     var mockLocalStorage: MockLocalStorage!
-    var offlineDataFetcher: OfflineDataFetcher<TestObject>!
+    var offlineDataFetcher: OfflineDataFetcher!
     var cancellables: Set<AnyCancellable> = []
     
     init() {
@@ -36,7 +36,7 @@ final class OfflineDataFetcherTests {
             try mockLocalStorage.saveObject(testObject, forKey: key)
             
             //should fetch data successfuly
-            offlineDataFetcher.fetchData(path: key)
+            offlineDataFetcher.fetchData(path: key, TestObject.self)
                 .sink { completion in
                     if case .failure(let error) = completion {
                         #expect(Bool(false), "Unexpected error: \(error)")
@@ -54,7 +54,7 @@ final class OfflineDataFetcherTests {
         let key = "unexistKey"
         do {
             //key not exist should return error
-            offlineDataFetcher.fetchData(path: key)
+            offlineDataFetcher.fetchData(path: key, TestObject.self)
                 .sink { completion in
                     if case .failure(let error) = completion {
                         #expect(error as! OfflineError == OfflineError.noDataAvailable, "error should be data not available")

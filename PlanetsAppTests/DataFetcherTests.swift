@@ -10,9 +10,9 @@ import Combine
 import Foundation
 
 final class DataFetcherTests {
-    var dataFetcher: PlanetDataFetcher!
-    var mockOfflineFetcher: MockOfflineDataFetcher<[Planet]>!
-    var mockOnlineFetcher: MockOnlineDataFetcher<PlanetResponse>!
+    var dataFetcher: DataFetcherRepository!
+    var mockOfflineFetcher: MockDataFetcher!
+    var mockOnlineFetcher: MockDataFetcher!
     var mockLocalStorage: MockLocalStorage!
     var mockNetworkMonitor: MockNetworkMonitor = MockNetworkMonitor()
     var mockNetworkService: MockNetworkService = MockNetworkService()
@@ -20,9 +20,9 @@ final class DataFetcherTests {
 
     init() {
         mockLocalStorage = MockLocalStorage()
-        mockOnlineFetcher = MockOnlineDataFetcher(networkService: MockNetworkService())
-        mockOfflineFetcher = MockOfflineDataFetcher(localStorage: mockLocalStorage)
-        dataFetcher = PlanetDataFetcher(offlineFetcher: mockOfflineFetcher, onlineFetcher: mockOnlineFetcher, localStorage: mockLocalStorage, networkMonitor: mockNetworkMonitor)
+        mockOnlineFetcher = MockDataFetcher()
+        mockOfflineFetcher = MockDataFetcher()
+        dataFetcher = DataFetcherRepository(offlineFetcher: mockOfflineFetcher, onlineFetcher: mockOnlineFetcher, localStorage: mockLocalStorage, networkMonitor: mockNetworkMonitor)
         cancellables = []
     }
 
@@ -35,25 +35,41 @@ final class DataFetcherTests {
     }
 
     @Test("ensure data taken from online fetch while internet is available")
-     func testValidOnlineFetch() {
-         do {
-             let mockPlanets = try loadMockData(from: "Planets", as: PlanetResponse.self)
+    func testValidOnlineFetch() {
+        do {
+            let mockPlanets = try loadMockData(from: "Planets", as: PlanetResponse.self)
 
-             mockOnlineFetcher.mockData = mockPlanets
+            mockOnlineFetcher.mockData = mockPlanets
 
-             mockNetworkMonitor.simulateNetworkChange(to: true)
+            mockNetworkMonitor.simulateNetworkChange(to: true)
 
-             dataFetcher.fetchData(path: APIConstants.BASEURL)
-                 .sink { completion in
-                     if case .failure(let error) = completion {
-                         #expect(Bool(false), "Unexpected error: \(error)")
-                     }
-                 } receiveValue: { planets in
-                     #expect(planets == mockPlanets.results, "The fetched data should match the mocked data")
-                 }.store(in: &cancellables)
-         } catch {
-             #expect(Bool(false), "Unexpected error: \(error)")
-         }
+            dataFetcher.fetchData(path: APIConstants.BASE_URL, PlanetResponse.self)
+                .sink { completion in
+                    if case .failure(let error) = completion {
+                        #expect(Bool(false), "Unexpected error: \(error)")
+                    }
+                } receiveValue: { planet in
+                    #expect(planet.results == mockPlanets.results, "The fetched data should match the mocked data")
+                }.store(in: &cancellables)
+        } catch {
+            #expect(Bool(false), "Unexpected error: \(error)")
+        }
+    }
+
+    @Test("test invlalid status in online fetch while internet is available")
+    func testInValidOnlineFetch() {
+        mockOnlineFetcher.isOffline = false
+
+        mockNetworkMonitor.simulateNetworkChange(to: true)
+
+        dataFetcher.fetchData(path: "", PlanetResponse.self)
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    #expect(error is NetworkError, "Unexpected error: \(error)")
+                }
+            } receiveValue: { planet in
+                #expect(Bool(false), "Expect error but get planet: \(planet)")
+            }.store(in: &cancellables)
     }
 
     @Test("ensure data taken from offline repo while internet is unavailable")
@@ -66,17 +82,33 @@ final class DataFetcherTests {
             // Simulate online network status
             mockNetworkMonitor.simulateNetworkChange(to: false)
 
-            dataFetcher.fetchData(path: APIConstants.BASEURL)
+            dataFetcher.fetchData(path: APIConstants.BASE_URL, PlanetResponse.self)
                 .sink { completion in
                     if case .failure(let error) = completion {
                         #expect(Bool(false), "Unexpected error: \(error)")
                     }
-                } receiveValue: { planets in
-                    #expect(planets == mockOfflinePlanets.results, "The fetched data should match the offline mocked data")
+                } receiveValue: { planet in
+                    #expect(planet.results == mockOfflinePlanets.results, "The fetched data should match the offline mocked data")
                 }.store(in: &cancellables)
         } catch {
             #expect(Bool(false), "Unexpected error: \(error)")
         }
+    }
+
+    @Test("test invlalid status in offline fetch while internet is unavailable")
+    func testInValidOfflineFetch() {
+        mockOnlineFetcher.isOffline = true
+
+        mockNetworkMonitor.simulateNetworkChange(to: true)
+
+        dataFetcher.fetchData(path: "", PlanetResponse.self)
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    #expect(error is OfflineError, "Unexpected error: \(error)")
+                }
+            } receiveValue: { planet in
+                #expect(Bool(false), "Expect error but get planet: \(planet)")
+            }.store(in: &cancellables)
     }
 
     func loadMockData<T: Decodable>(from fileName: String, as type: T.Type) throws -> T {
@@ -87,5 +119,5 @@ final class DataFetcherTests {
             #expect(Bool(false), "Failed to load or decode \(fileName).json: \(error)")
             throw  error
         }
-   }
+    }
 }

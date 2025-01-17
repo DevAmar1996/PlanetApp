@@ -24,10 +24,9 @@ final class URLSessionNetworkServiceTests {
     }
 
     @Test("success test when fetch data from correct url")
-   func testMakeRequestSuccess() async throws {
-        print("init test1")
+    func testMakeRequestSuccess() async throws {
         //test rquest Plenets api using url session
-        networkService.makeRequest(url: APIConstants.BASEURL, httpMethod: .get).sink { completion in
+        networkService.makeRequest(url: APIConstants.BASE_URL, httpMethod: .get).sink { completion in
             switch completion {
             case .failure(let error):
                 //should not fail
@@ -38,12 +37,10 @@ final class URLSessionNetworkServiceTests {
         } receiveValue: { (data: PlanetResponse) in
             #expect(Bool(true), "Fetch data successfully \(data)")
         }.store(in: &cancellables)
-        print("deinit test1")
     }
 
     @Test("failed test when fetch data from empty url")
     func testMakeRequestFail_EmptyPath() async throws {
-        print("init test2")
         //test rquest Plenets api using url session
         networkService.makeRequest(url: "", httpMethod: .get).sink { completion in
             switch completion {
@@ -56,12 +53,10 @@ final class URLSessionNetworkServiceTests {
         } receiveValue: { (data: PlanetResponse) in
             #expect(Bool(false), "not expext to fetch data successfully \(data)")
         }.store(in: &cancellables)
-        print("deinit test2")
-
     }
+
     @Test("failed test when fetch data from wrong url")
     func testMakeRequestFail_WrongPath() async throws {
-        print("init test3")
 
         //test rquest Plenets api using url session
         networkService.makeRequest(url: "https://translate.google.com/?sl=en&tl=ar&op=translate", httpMethod: .get).sink { completion in
@@ -75,8 +70,6 @@ final class URLSessionNetworkServiceTests {
         } receiveValue: { (data: PlanetResponse) in
             #expect(Bool(false), "not expext to fetch data successfully \(data)")
         }.store(in: &cancellables)
-        print("deinit test3")
-
     }
 
 }

@@ -8,5 +8,5 @@
 import Foundation
 
 struct APIConstants {
-      static let BASEURL = "https://swapi.dev/api/planets/"
+    static let BASE_URL = "https://swapi.dev/api/planets/"
 }

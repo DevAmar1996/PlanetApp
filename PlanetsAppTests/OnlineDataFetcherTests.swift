@@ -11,7 +11,7 @@ import Foundation
 
 final class OnlineDataFetcherTests {
     var mockNetworkService: MockNetworkService!
-    var onlineDataFetcher: OnlineDataFetcher<TestObject>!
+    var onlineDataFetcher: OnlineDataFetcher!
     var cancellables: Set<AnyCancellable> = []
 
     init() {
@@ -34,7 +34,7 @@ final class OnlineDataFetcherTests {
         let jsonData = try! JSONEncoder().encode(testObject)
         mockNetworkService.data = jsonData
         mockNetworkService.shouldReturnError = false
-        onlineDataFetcher.fetchData(path: APIConstants.BASEURL)
+        onlineDataFetcher.fetchData(path: APIConstants.BASE_URL, TestObject.self)
             .sink { completion in
                 if case .failure(let error) = completion {
                     #expect(Bool(false), "Unexpected error: \(error)")
@@ -45,9 +45,9 @@ final class OnlineDataFetcherTests {
     }
 
     @Test("online fetch data from wrong source")
-     func testFetchData_Failure() {
+    func testFetchData_Failure() {
         mockNetworkService.shouldReturnError = true
-        onlineDataFetcher.fetchData(path: "")
+        onlineDataFetcher.fetchData(path: "", TestObject.self)
             .sink { completion in
                 if case .failure(let error) = completion {
                     #expect(error is URLError, "Expected URLError got \(error)")

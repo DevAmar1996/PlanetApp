@@ -37,7 +37,7 @@ Here are some screenshots of the application:
    - Unit Tests: Press Cmd + U to run the unit tests.
 
 ### Features 
-* **Cross-Platform upport**: Runs on iPhone, iPad, and macOS with a responsive UI.
+* **Cross-Platform Support**: Runs on iPhone, iPad, and macOS with a responsive UI.
 * **Offline Support**: Caches data locally for offline viewing.
 * **Dynamic Grid Layout**: Adaptive grid optimized for larger screens like iPad and macOS, utilizing available space efficiently.
 * **Combine Integration**: Fetches and processes data using Combine framework.
@@ -70,7 +70,7 @@ This process was guided by the following principles:
    - This design supports flexibility and allows the app to handle various data models without additional code changes.
 
 ### Recommendations for Future Features and Improvements
-1. **Pagintion Support:**
+1. **Pagination Support:**
     - Implement pagination to fetch and display planets dynamically as the user scrolls through the list.
 2. **Search Functionality:**
     - Add a search bar to allow users to find planets by name or other attributes (e.g., climate, population).
@@ -87,7 +87,7 @@ This process was guided by the following principles:
    - Allow users to filter planets based on criteria such as climate or terrain.
 8. **Push Notifications:**
    - Notify users about updates or new planets added to the API.
-8. **nteractive Animations:**
+9. **nteractive Animations:**
    - Add smooth animations for transitions between views or when interacting with planets to improve the user experience.
 
 

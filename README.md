@@ -5,13 +5,13 @@
 Here are some screenshots of the application:
 
 ### iPhone Main Screen
-![Simulator Screenshot - iPhone 16 - 2025-01-18 at 00 41 51](https://github.com/user-attachments/assets/fb644de0-7887-4c34-ad2c-af56a94f0c7c)
+<img src="https://github.com/user-attachments/assets/fb644de0-7887-4c34-ad2c-af56a94f0c7c" alt="iPhone Screenshot" width="300"/>
 
 ### iPad Main Screen
-![Simulator Screenshot - iPad Air 13-inch (M2) - 2025-01-18 at 00 39 39](https://github.com/user-attachments/assets/ece20ad0-f602-4931-b3d7-77326872522c)
+<img src="https://github.com/user-attachments/assets/ece20ad0-f602-4931-b3d7-77326872522c" alt="iPad Screenshot" width="400"/>
 
 ### Mac os Main Screen
-<img width="1026" alt="Screenshot 2025-01-18 at 12 42 32 AM" src="https://github.com/user-attachments/assets/9099657f-c589-4781-ad7e-c56758dd7a22" />
+<img width="500" alt="Screenshot 2025-01-18 at 12 42 32 AM" src="https://github.com/user-attachments/assets/9099657f-c589-4781-ad7e-c56758dd7a22" />
 
 
 ## Building and Running the Application
@@ -44,17 +44,18 @@ Here are some screenshots of the application:
 * **SwiftUI Interface**: Entirely built using SwiftUI for modern and declarative UI design.
 
 ### Assumption: Data Flow Management
-I began by outlining a clear architecture for managing data flow within the app. This process was guided by the following principles:
+I began by outlining a clear architecture for managing data flow within the app.
+This process was guided by the following principles:
 
 1. **Drawing the Architecture:**
    - I visualized the app's architecture, particularly focusing on how data should be fetched and managed efficiently.
-
-      - ![PlanetsApp drawio](https://github.com/user-attachments/assets/5cac8ffc-c59d-434d-b596-078bf3ea18ec)
+   
+   - <img src="https://github.com/user-attachments/assets/5cac8ffc-c59d-434d-b596-078bf3ea18ec" alt="PlanetsApp Architecture" height="600" width="400"/>
 
 2. **Generic Protocol for Data Fetching:**
    - A ```DataFetcher``` protocol was created to abstract the logic of data fetching, making it reusable and type-safe for any ```Encodable``` data.
 
-3. **Data Fetcher Implementations:**
+3. **Data Fetcher Implementations:** 
    - Two concrete classes implement the ```DataFetcher``` protocol:
       - OfflineDataFetcher: Retrieves data from local storage.
       - OnlineDataFetcher: Fetches data from a remote API.

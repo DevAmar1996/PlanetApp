@@ -31,7 +31,7 @@ final class PlanetsViewModelTests {
             // Arrange
             let jsonData = try Bundle.main.loadJSONData(from: "Planets")
             let expectedPlanets = try JSONDecoder().decode(PlanetResponse.self, from: jsonData)
-            mockDataFetcher.mockData = expectedPlanets.results
+            mockDataFetcher.mockData = expectedPlanets
             mockDataFetcher.isOffline = false
 
             viewModel.loadViewContent()

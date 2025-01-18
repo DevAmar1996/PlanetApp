@@ -14,11 +14,11 @@ final class DataFetcherTests {
     var mockOfflineFetcher: MockDataFetcher!
     var mockOnlineFetcher: MockDataFetcher!
     var mockLocalStorage: MockLocalStorage!
-    var mockNetworkMonitor: MockNetworkMonitor = MockNetworkMonitor()
-    var mockNetworkService: MockNetworkService = MockNetworkService()
+    var mockNetworkMonitor: MockNetworkMonitor!
     var cancellables: Set<AnyCancellable> = []
 
     init() {
+        mockNetworkMonitor = MockNetworkMonitor()
         mockLocalStorage = MockLocalStorage()
         mockOnlineFetcher = MockDataFetcher()
         mockOfflineFetcher = MockDataFetcher()
@@ -30,6 +30,7 @@ final class DataFetcherTests {
         mockLocalStorage = nil
         mockOnlineFetcher = nil
         mockOfflineFetcher = nil
+        mockNetworkMonitor = nil
         dataFetcher = nil
         cancellables = []
     }
@@ -77,8 +78,8 @@ final class DataFetcherTests {
         do {
             // Mock offline data
             let mockOfflinePlanets = try loadMockData(from: "OfflinePlanets", as: PlanetResponse.self)
-            mockOfflineFetcher.mockData = mockOfflinePlanets.results
-
+            mockOfflineFetcher.mockData = mockOfflinePlanets
+            mockOfflineFetcher.isOffline = true
             // Simulate online network status
             mockNetworkMonitor.simulateNetworkChange(to: false)
 

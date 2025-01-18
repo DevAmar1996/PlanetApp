@@ -8,6 +8,8 @@
 import Foundation
 import Combine
 
+/// Fetches data from a remote source using a `NetworkService`.
+/// Performs HTTP GET requests and returns a Combine publisher with the decoded response or an error.
 class OnlineDataFetcher: DataFetcher {
 
     private let networkService: NetworkService

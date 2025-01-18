@@ -15,12 +15,12 @@ protocol NetworkMonitor {
     /// Indicates whether the device is currently connected to the network.
     var isConnected: Bool { get }
 
-    /// A combine publisher that publish the updates whenever network connection status changed
+    /// A combine publisher that publish the updates whenever network connection status changed.
     var isConnectedPublisher: AnyPublisher<Bool, Never> { get }
 }
 
 class PlanetNetworkMonitor: NetworkMonitor {
-    /// instance to monitor network path changes
+    /// instance to monitor network path changes.
     private let monitor = NWPathMonitor()
 
     /// A background queue to execute network monitoring tasks.
@@ -28,7 +28,7 @@ class PlanetNetworkMonitor: NetworkMonitor {
 
     @Published private(set) var isConnected = true
 
-    /// get updated when ever is connected updated
+    /// get updated when ever is connected updated.
     var isConnectedPublisher: AnyPublisher<Bool, Never> {
         $isConnected.eraseToAnyPublisher()
     }
@@ -37,11 +37,11 @@ class PlanetNetworkMonitor: NetworkMonitor {
     /// The monitor observes changes to the network path and updates the `isConnected` property
     init() {
         monitor.pathUpdateHandler = { path in
-            /// update the is connected variable based on network status
+            /// update the is connected variable based on network status.
             self.isConnected = path.status == .satisfied
         }
 
-        // start the network monitor on the background queue
+        /// start the network monitor on the background queue.
         monitor.start(queue: queue)
     }
 }

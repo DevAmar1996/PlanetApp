@@ -58,7 +58,6 @@ class PlanetsViewModel: ObservableObject {
                 break
             }
         } receiveValue: { [weak self] (planets: PlanetResponse) in
-            print("I got the planets ", planets.results)
             self?.planets = planets.results
         }.store(in: &cancellables)
     }

@@ -7,13 +7,7 @@
 
 import Foundation
 
-/// HTTP Methods
-///
-/// - get: GET
-/// - post: POST
-/// - put: PUT
-/// - patch: PATCH
-/// - delete: DELETE
+/// HTTP Methods.
 public enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"

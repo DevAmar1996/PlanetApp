@@ -8,13 +8,15 @@
 import Foundation
 import Combine
 
+/// Fetches data from local storage using a `LocalStorage` implementation.
+/// Returns a Combine publisher or throws `OfflineError.noDataAvailable` if data is missing.
 class OfflineDataFetcher: DataFetcher {
     let localStorage: LocalStorage
 
     init(localStorage: LocalStorage) {
         self.localStorage = localStorage
     }
-    
+
     func fetchData<T: Codable>(path: String, _ type: T.Type) -> AnyPublisher<T, Error> {
         // Attempt to retrieve the data from local storage.
         if let data = try? localStorage.retrieveObject(forKey: path,

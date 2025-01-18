@@ -21,28 +21,28 @@ struct URLSessionNetworkService: NetworkService {
                                    parameters: [String : Any]?,
                                    headers: [String : String]?) -> AnyPublisher<T, Error> {
         let session = URLSession.shared
-        //check if it is valid url
+        //check if it is valid url.
         guard let url = URL(string: url) else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
 
-        //prepare the request
+        //prepare the request.
         var request = URLRequest(url: url)
-        //set rqeust httpMethod
+        //set rqeust httpMethod.
         request.httpMethod = httpMethod.rawValue
 
-        //add headers
+        //add headers.
         headers?.forEach {
             request.addValue($1, forHTTPHeaderField: $0)
         }
 
-        //Encode parameters
+        //Encode parameters.
         if let parameters = parameters {
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
                 request.httpBody = jsonData
             } catch {
-                //return error
+                //return error.
                 return Fail(error: NetworkError.invalidParameter(params: parameters)
                 ).eraseToAnyPublisher()
             }
@@ -51,7 +51,7 @@ struct URLSessionNetworkService: NetworkService {
         return session.dataTaskPublisher(for: request)
             .tryMap { output in
                 print("OUTPUT is \(output)")
-                // Check the status code
+                // Check the status code.
                 guard let httpResponse = output.response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {
                     throw NetworkError.requestFailed(statusCode: (output.response as? HTTPURLResponse)?.statusCode ?? -1, message: "invalid request")

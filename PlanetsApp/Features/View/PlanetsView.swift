@@ -14,11 +14,11 @@ struct PlanetsView: View {
 
     var body: some View {
         Group {
-#if os(macOS)
+         #if os(macOS)
             macOSView
-#else
+          #else
             iOSView
-#endif
+          #endif
         }
         .onAppear {
             viewModel.loadViewContent()
@@ -49,7 +49,7 @@ struct PlanetsView: View {
         NavigationView {
             Group {
                 if let viewModelError = viewModel.errorMessage {
-                    //display the error for user allow them to retry the reuest
+                    //display the error for user allow them to retry the request.
                     VStack {
                         Text("Error: \(viewModelError)")
                             .foregroundColor(.red)
@@ -64,7 +64,7 @@ struct PlanetsView: View {
                         .cornerRadius(8)
                     }
                 } else if viewModel.planets.isEmpty {
-                    //request not fetched yet disply loading indicator
+                    //request not fetched yet disply loading indicator.
                     ProgressView("Loading Planets...")
                         .progressViewStyle(CircularProgressViewStyle())
                 } else {
@@ -81,7 +81,7 @@ struct PlanetsView: View {
     private var contentList: some View {
         Group {
             if horizontalSizeClass == .regular {
-                // Grid layout for iPads
+                // Grid layout for iPads.
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 180))], spacing: 16) {
                         ForEach(viewModel.planets, id: \.id) { planet in
@@ -92,7 +92,7 @@ struct PlanetsView: View {
                     .padding()
                 }
             } else {
-                // List layout for iPhones
+                // List layout for iPhones.
                 List(viewModel.planets, id: \.id) { planet in
                     Text(planet.name)
                         .font(.headline)
